@@ -10,13 +10,14 @@ import java.util.Optional;
 public interface Database {
 
     void changeBalance(double amt, String accountNumber);
-    //List<Account> getAccountsByUser(User user);
-    Optional<Account> getAccountByAccNumber(String AccNumber);
-    List<Transaction>  getTransactionsByAccount(String accountNumber);
+
+    List<Transaction>  getTransactionsByAccount(String accountNumberA);
     List<Transaction>  getAllTransactions();
     Optional<User> getUser(String username, String password);
     void addTransaction(Transaction transaction);
 
-
-
+    Long getAccountId(Account account);
+    Optional <Account>  getAccountById(Long accId);
+    List<Account> getAccountsByUserId(Long id);
+    Optional<Account> getAccountByAccNumber(String AccNumber);
 }

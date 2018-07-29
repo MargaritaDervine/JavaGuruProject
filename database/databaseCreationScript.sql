@@ -5,13 +5,35 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `java2` DEFAULT CHARACTER SET utf8 ;
 USE `java2` ;
 
-DROP TABLE IF EXISTS `products` ;
+DROP TABLE IF EXISTS `Users` ;
+DROP TABLE IF EXISTS `Accounts` ;
+DROP TABLE IF EXISTS `Transactions` ;
 
-CREATE TABLE IF NOT EXISTS `products` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(32) NOT NULL,
-  `description` VARCHAR(100) NOT NULL,
+  `first_name` VARCHAR(32) NOT NULL,
+  `last_name` VARCHAR(32) NOT NULL,
+  `username` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
   PRIMARY KEY (`id`)
+)
+CREATE TABLE IF NOT EXISTS `Accounts` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `account_number` VARCHAR(10) NOT NULL UNIQUE,
+  `currency` VARCHAR(3) NOT NULL,
+  `balance` DEC NOT NULL,
+  `user_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES Users(id)
+)
+CREATE TABLE IF NOT EXISTS `Transactions` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `from_account_id` BIGINT NOT NULL,
+  `to_account_id` BIGINT NOT NULL,
+  `dateTime` DATETIME NOT NULL,
+  `amount` DEC NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (from_account_id) REFERENCES Accounts(id)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;

@@ -9,7 +9,6 @@ public class ChangeBalanceService {
 
     private Database database;
 
-
     public ChangeBalanceService(Database database) {
         this.database = database;
     }

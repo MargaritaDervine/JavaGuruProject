@@ -1,6 +1,7 @@
 package services;
 
 import database.Database;
+import domain.Account;
 import domain.Transaction;
 import java.util.List;
 

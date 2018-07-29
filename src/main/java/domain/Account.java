@@ -4,6 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
+    Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Account(Long id, String number, double balance, String currency, List<Transaction> transactions) {
+        this.id = id;
+        this.number = number;
+        this.balance = balance;
+        this.currency = currency;
+        this.transactions = transactions;
+    }
+
     private String number;
     private double balance;
     private String currency;

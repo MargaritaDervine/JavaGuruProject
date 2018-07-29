@@ -1,16 +1,17 @@
 import database.Database;
 import database.InMemoryDatabase;
+import database.JDBCDatabaseImpl;
 import domain.User;
 import services.*;
 import views.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class InternetBankApp {
     public static void main(String[] args) {
-        Database database = new InMemoryDatabase();
+        //Database database = new InMemoryDatabase();
+        Database database = new JDBCDatabaseImpl();
         LogInService logInService = new LogInService(database);
         LogInView logInView = new LogInView(logInService);
         printStartPage();
@@ -24,7 +25,7 @@ public class InternetBankApp {
                 if (response == 1) {
                     currentUser = logInView.executeUser();
                 } else if (response == 2) {
-                   new ExitView().execute();
+                    new ExitView().execute();
                 }
             } catch (Exception e) {
                 printNotValidChoice();
@@ -43,7 +44,6 @@ public class InternetBankApp {
         TransactionHistoryView transactionHistoryView = new TransactionHistoryView(transactionHistoryService);
 
         accountsAndBalancesView.execute();
-
 
         Map<Integer, ConsoleView> menuMap = new HashMap<>();
         menuMap.put(1, accountsAndBalancesView);
@@ -90,6 +90,5 @@ public class InternetBankApp {
     private static void printStartPage() {
         System.out.println("Welcome");
     }
-
 
 }

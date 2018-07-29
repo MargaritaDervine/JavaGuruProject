@@ -15,8 +15,14 @@ public class InMemoryDatabase implements Database {
 
     private ArrayList<Transaction> initTransactions(){
         ArrayList<Transaction> trs = new ArrayList<>();
-        Transaction tr1 = new Transaction(acc1,acc2,-100);
-        Transaction tr2 = new Transaction(acc2,acc1,100);
+        Transaction tr1 = new Transaction();
+        tr1.setToAccount(acc2);
+        tr1.setFromAcc(acc1);
+        tr1.setAmount(-100);
+        Transaction tr2 = new Transaction();
+        tr2.setToAccount(acc1);
+        tr2.setFromAcc(acc2);
+        tr2.setAmount(100);
         trs.add(tr1);
         trs.add(tr2);
         return trs;
@@ -30,7 +36,7 @@ public class InMemoryDatabase implements Database {
         return accs;
     }
 
-    User user1 = new User("A", "A",  initAccounts(), "a", "123");
+    User user1 = new User(1L,"A", "A",  initAccounts(), "a", "123");
   //  User user2 = new User("B", "B",  accounts, "AB", "zxc");
     ArrayList<User> users= new ArrayList<>(Arrays.asList(user1));
     ArrayList<Transaction> transactions = initTransactions();
@@ -56,6 +62,25 @@ public class InMemoryDatabase implements Database {
    public void addTransaction(Transaction transaction){
        transactions.add(transaction);
    }
+
+    @Override
+    public List<Account> getAccountsByUserId(Long id) {
+       //for (Account a:accounts){
+      //     if a.
+      // }
+
+        return null;
+    }
+
+    @Override
+    public Long getAccountId(Account account) {
+        return null;
+    }
+
+    @Override
+    public Optional<Account> getAccountById(Long accId) {
+        return Optional.empty();
+    }
 
     @Override
     public Optional<Account> getAccountByAccNumber(String accN) {

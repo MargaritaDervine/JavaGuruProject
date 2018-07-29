@@ -4,6 +4,7 @@ import database.Database;
 import domain.Account;
 import domain.Transaction;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class TransactionService {
         Optional<Account> fromAccOp = database.getAccountByAccNumber(accFrom);
         Optional<Account> toAccOp = database.getAccountByAccNumber(accTo);
 
-        if (!validateAccounts(accFrom, accTo, errors)) {
+        if (!validateAccounts(accFrom, accTo,fromAccOp, toAccOp, errors)) {
             errors.add("Account is not valid");
             return false;
         }
@@ -28,7 +29,11 @@ public class TransactionService {
             errors.add("Amount is not valid.");
             return false;
         }
-        Transaction transaction = new Transaction(fromAccOp.get(), toAccOp.get(), amt);
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amt);
+        transaction.setDateTime(LocalDateTime.now());
+        transaction.setFromAcc(fromAccOp.get());
+        transaction.setToAccount(toAccOp.get());
         database.addTransaction(transaction);
 
         changeBalanceService.changeBalance(-amt, accFrom);
@@ -46,9 +51,8 @@ public class TransactionService {
         return true;
     }
 
-    private boolean validateAccounts(String accFrom, String accTo, List<String> errors) {
-        Optional<Account> fromAccOp = database.getAccountByAccNumber(accFrom);
-        Optional<Account> toAccOp = database.getAccountByAccNumber(accTo);
+    private boolean validateAccounts(String accFrom, String accTo, Optional<Account>  fromAccOp,
+                                     Optional<Account> toAccOp, List<String> errors) {
         if (!checkPresence(accFrom, fromAccOp, errors) || !checkPresence(accTo, toAccOp, errors)) {
             return false;
         }
