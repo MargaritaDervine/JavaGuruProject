@@ -1,7 +1,6 @@
 package domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.time.LocalDateTime;
 
 public class Transaction {
@@ -53,11 +52,5 @@ public class Transaction {
 
     public Transaction() {
     }
-
-
-   // public boolean isValid(Account fromAcc, double amount){
-    //    return fromAcc.getBalance() > amount;
-  //  }
-
 
 }

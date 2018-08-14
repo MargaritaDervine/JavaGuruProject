@@ -36,11 +36,11 @@ public class InMemoryDatabase implements Database {
         return accs;
     }
 
-    User user1 = new User(1L,"A", "A",  initAccounts(), "a", "123");
+    User user1 = new User(1L,"A", "A",  "a", "123");
   //  User user2 = new User("B", "B",  accounts, "AB", "zxc");
     ArrayList<User> users= new ArrayList<>(Arrays.asList(user1));
     ArrayList<Transaction> transactions = initTransactions();
-    ArrayList<Account> accounts = initAccounts();
+   ArrayList<Account> accounts = initAccounts();
 
     @Override
     public void changeBalance(double newAmt, String accountNumber) {
@@ -72,12 +72,12 @@ public class InMemoryDatabase implements Database {
         return null;
     }
 
-    @Override
+
     public Long getAccountId(Account account) {
         return null;
     }
 
-    @Override
+
     public Optional<Account> getAccountById(Long accId) {
         return Optional.empty();
     }
@@ -105,7 +105,7 @@ public class InMemoryDatabase implements Database {
         return null;
     }
 
-    @Override
+
     public List<Transaction>  getAllTransactions(){
        return new ArrayList<>(transactions);
     }

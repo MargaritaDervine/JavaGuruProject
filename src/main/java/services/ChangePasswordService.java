@@ -1,16 +1,16 @@
 package services;
 
 import database.Database;
-import domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ChangePasswordService {
-    Database database;
+    @Autowired
+   Database database;
 
     public ChangePasswordService(Database database) {
         this.database = database;
     }
 
-    //public void changePassword(User user, String newPassword){
-   //     database.
-   // }
 }

@@ -1,16 +1,15 @@
 import database.Database;
-import database.InMemoryDatabase;
 import database.JDBCDatabaseImpl;
 import domain.User;
 import services.*;
 import views.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class InternetBankApp {
     public static void main(String[] args) {
-        //Database database = new InMemoryDatabase();
         Database database = new JDBCDatabaseImpl();
         LogInService logInService = new LogInService(database);
         LogInView logInView = new LogInView(logInService);
@@ -37,23 +36,33 @@ public class InternetBankApp {
         CheckAccountBalanceService checkAccountBalanceService = new CheckAccountBalanceService(database);
         CheckAccountsAndBalancesView accountsAndBalancesView = new CheckAccountsAndBalancesView(currentUser, checkAccountBalanceService);
 
-        TransactionService transactionService = new TransactionService(database, changeBalanceService);
-        TransactionView transactionView = new TransactionView(currentUser, transactionService);
+        TransactionService transactionService = new TransactionService(database, changeBalanceService,currentUser);
+        TransactionView transactionView = new TransactionView(transactionService, accountsAndBalancesView);
 
-        TransactionHistoryService transactionHistoryService = new TransactionHistoryService(database);
-        TransactionHistoryView transactionHistoryView = new TransactionHistoryView(transactionHistoryService);
+        TransactionHistoryService transactionHistoryService = new TransactionHistoryService(database, currentUser);
+        TransactionHistoryView transactionHistoryView = new TransactionHistoryView(transactionHistoryService, accountsAndBalancesView);
 
+       /* ApplicationContext context
+                = new AnnotationConfigApplicationContext(SpringConfig.class);
+        context.getBean(CheckAccountsAndBalancesView.class).execute();
+        */
         accountsAndBalancesView.execute();
 
+        /*Map<Integer, ConsoleView> menuMap = new HashMap<>();
+        menuMap.put(1, context.getBean(CheckAccountsAndBalancesView.class));
+        menuMap.put(2, context.getBean(TransactionView.class));
+        menuMap.put(3, context.getBean(TransactionHistoryView.class));
+        menuMap.put(4, new ExitView());
+*/
         Map<Integer, ConsoleView> menuMap = new HashMap<>();
         menuMap.put(1, accountsAndBalancesView);
         menuMap.put(2, transactionView);
         menuMap.put(3, transactionHistoryView);
         menuMap.put(4, new ExitView());
 
-        printOptions();
         while (true) {
             ConsoleView consoleView;
+            printOptions();
             try {
                 int menuItem = getFromUserMenuItemToExecute();
                 consoleView = menuMap.get(menuItem);

@@ -18,23 +18,24 @@ CREATE TABLE IF NOT EXISTS `Users` (
   PRIMARY KEY (`id`)
 )
 CREATE TABLE IF NOT EXISTS `Accounts` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `account_number` VARCHAR(10) NOT NULL UNIQUE,
+  `account_number` VARCHAR(10) NOT NULL,
   `currency` VARCHAR(3) NOT NULL,
-  `balance` DEC NOT NULL,
+  `balance` DEC NOT NULL ,
   `user_id` BIGINT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`account_number`),
   FOREIGN KEY (user_id) REFERENCES Users(id)
-)
+);
 CREATE TABLE IF NOT EXISTS `Transactions` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `from_account_id` BIGINT NOT NULL,
-  `to_account_id` BIGINT NOT NULL,
+  `transaction_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `from_account_number` VARCHAR(10) NOT NULL,
+  `to_account_number` VARCHAR(10) NOT NULL ,
   `dateTime` DATETIME NOT NULL,
   `amount` DEC NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (from_account_id) REFERENCES Accounts(id)
-)
+  PRIMARY KEY (`transaction_id`),
+  FOREIGN KEY (from_account_number) REFERENCES Accounts(account_number),
+  FOREIGN KEY (to_account_number) REFERENCES Accounts(account_number)
+);
+
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 

@@ -3,18 +3,26 @@ package services;
 import database.Database;
 import domain.Account;
 import domain.Transaction;
+import domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class TransactionService {
+    @Autowired
     private Database database;
+    @Autowired
     private ChangeBalanceService changeBalanceService;
+    @Autowired
+    private User user;
 
-    public TransactionService(Database database, ChangeBalanceService changeBalanceService) {
+    public TransactionService(Database database, ChangeBalanceService changeBalanceService, User currentUser) {
         this.database = database;
         this.changeBalanceService = changeBalanceService;
+        this.user = currentUser;
     }
 
     public boolean doTransaction(String accFrom, String accTo, double amt, List<String> errors) {

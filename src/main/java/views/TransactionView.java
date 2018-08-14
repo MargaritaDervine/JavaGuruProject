@@ -1,5 +1,6 @@
 package views;
 
+import Util.AccountUtil;
 import domain.User;
 import services.TransactionService;
 
@@ -8,16 +9,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TransactionView implements ConsoleView {
-    User currentUser;
     TransactionService transactionService;
+    CheckAccountsAndBalancesView checkAccountsAndBalancesView;
 
-    public TransactionView(User currentUser, TransactionService transactionService) {
-        this.currentUser = currentUser;
+    public TransactionView(TransactionService transactionService, CheckAccountsAndBalancesView checkAccountsAndBalancesView) {
         this.transactionService = transactionService;
+        this.checkAccountsAndBalancesView = checkAccountsAndBalancesView;
     }
 
     @Override
     public void execute() {
+        checkAccountsAndBalancesView.printAccounts();
         String accFrom = getAccountFrom();
         String accTo = getAccountTo();
         double amount = 0.0;

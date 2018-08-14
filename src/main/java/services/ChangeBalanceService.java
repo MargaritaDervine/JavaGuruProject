@@ -2,12 +2,15 @@ package services;
 
 import database.Database;
 import domain.Account;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
+@Component
 public class ChangeBalanceService {
 
-    private Database database;
+    @Autowired
+   private Database database;
 
     public ChangeBalanceService(Database database) {
         this.database = database;
