@@ -21,7 +21,7 @@ Next steps:
    UI, Business Logic, Data Access Layer
 
 Lesson 3:
-5. Rename commands to views - they represent UI layer.
+5. Rename commands to java2courseIbank.views - they represent UI layer.
 6. Introduce data validation on business logic side.
    Business Rule: when you add product to the list,
    product title is required, must not be null or empty.
@@ -44,7 +44,7 @@ Lesson 4
 Lesson 4:
 11.Implement Business Rule: User can create different shopping lists.
    Each shopping list must have unique title.
-12.Think about domain model design. Introduce ShoppingList entity.
+12.Think about java2courseIbank.domain model design. Introduce ShoppingList entity.
    Discuss shopping list and product relations and how to implement them.
 13.Implement CRUD operations for Shopping List entity.
 
