@@ -1,9 +1,16 @@
 package java2courseIbank.businessLogic.services.DoTransaction;
 
+import java2courseIbank.AppError;
+import java2courseIbank.businessLogic.services.User.GetUserRequest;
+import java2courseIbank.businessLogic.services.User.GetUserResponse;
+import java2courseIbank.businessLogic.services.User.GetUserService;
 import java2courseIbank.database.AccountRepository;
 import java2courseIbank.database.TransactionRepository;
+import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.Account;
 import java2courseIbank.domain.Transaction;
+import java2courseIbank.domain.User;
+import java2courseIbank.web.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +27,21 @@ public class TransactionService {
     private TransactionRepository transactionRepository;
     @Autowired
     private TransactionValidator transactionValidator;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    GetUserService getUserService;
 
     @Transactional
     public DoTransactionResponse doTransaction(DoTransactionRequest request) {
-
         String accFrom = request.getAccFrom();
         String accTo = request.getAccTo();
         double amount = request.getAmt();
-        List<String> validationErrors = transactionValidator.validateErrors(accFrom, accTo,
-                amount, accountRepository);
+
+
+        List<AppError> validationErrors = transactionValidator.validateTransaction(accFrom, accTo,
+                amount, accountRepository, userRepository, request.getUsername());
         if (!validationErrors.isEmpty()) {
             return new DoTransactionResponse(validationErrors);
         }

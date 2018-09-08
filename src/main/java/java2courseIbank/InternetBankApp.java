@@ -1,11 +1,9 @@
 package java2courseIbank;
 
 import java2courseIbank.config.SpringConfig;
-import java2courseIbank.database.Database;
-import java2courseIbank.database.ORMDatabaseImpl;
+import java2courseIbank.views.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import java2courseIbank.views.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +13,7 @@ public class InternetBankApp {
     public static void main(String[] args) {
         // in each view ask login
         //Database database = new JDBCDatabaseImpl();
-        Database database = new ORMDatabaseImpl();
+      //  Database database = new ORMDatabaseImpl();
         //LogInService logInService = new LogInService(database);
         //LogInView logInView = new LogInView(logInService);
 

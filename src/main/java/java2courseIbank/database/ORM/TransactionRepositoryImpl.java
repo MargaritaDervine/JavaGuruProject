@@ -2,18 +2,26 @@ package java2courseIbank.database.ORM;
 
 import java2courseIbank.database.ORMRepository;
 import java2courseIbank.database.TransactionRepository;
+import java2courseIbank.domain.Account;
 import java2courseIbank.domain.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Component
+@Transactional
 public class TransactionRepositoryImpl extends ORMRepository implements TransactionRepository {
     @Override
-    public List<Transaction> getTransactionsByAccount(String accountNumber) {
+    public List<Transaction> getTransactionsByAccount(Account account) {
+        Criterion rest1 = Restrictions.eq("fromAcc", account);
+        Criterion rest2 = Restrictions.eq("toAccount", account);
         return session().createCriteria(Transaction.class)
-                .add(Restrictions.eq("from_account_number", accountNumber))
-                .add(Restrictions.eq("to_account_number", accountNumber))
+                .add(Restrictions.or(rest1, rest2))
+                //.add(Restrictions.eq("fromAcc", account))
+                // .add(Restrictions.eq("toAccount", account))
                 .list();
     }
 

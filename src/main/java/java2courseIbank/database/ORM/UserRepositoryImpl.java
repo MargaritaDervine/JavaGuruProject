@@ -5,10 +5,12 @@ import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.User;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Component
+@Transactional
 public class UserRepositoryImpl extends ORMRepository implements UserRepository {
     @Override
     public Optional<User> getUser(String username, String password) {

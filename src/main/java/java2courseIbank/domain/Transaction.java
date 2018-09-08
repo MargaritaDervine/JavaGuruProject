@@ -70,4 +70,9 @@ public class Transaction {
 
     public Long getId(){return id;}
 
+    public Account getFromAcc() {
+        return fromAcc;
+    }
+
+
 }

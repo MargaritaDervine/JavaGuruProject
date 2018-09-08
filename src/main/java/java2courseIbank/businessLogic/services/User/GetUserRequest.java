@@ -1,13 +1,13 @@
 package java2courseIbank.businessLogic.services.User;
 
 public class GetUserRequest {
-    private Long userId;
+    private String username;
 
-    public GetUserRequest(Long userId) {
-        this.userId = userId;
+    public GetUserRequest(String username) {
+        this.username = username;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserName() {
+        return username;
     }
 }

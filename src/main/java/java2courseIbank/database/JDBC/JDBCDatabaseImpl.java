@@ -36,7 +36,7 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
 
     @Override
     public Optional<Account> getAccountByAccNumber(String AccNumber) {
-        Connection connection;
+       /* Connection connection;
         Account account = null;
         try {
             connection = getConnection();
@@ -55,6 +55,8 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
             e.printStackTrace();
         }
         return Optional.ofNullable(account);
+        */
+        return Optional.empty();
     }
 
     @Override
@@ -92,7 +94,7 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
 
     @Override
     public Optional<User> getUser(String username, String password) {
-        Connection connection = null;
+       /* Connection connection = null;
         try {
             connection = getConnection();
             String sql = "select * from USERS where username = ? and password = ?";
@@ -114,11 +116,13 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
         } finally {
             closeConnection(connection);
         }
+        */
+       return Optional.empty();
     }
 
     @Override
     public Optional<User> getUser(String username) {
-        Connection connection = null;
+        /*Connection connection = null;
         try {
             connection = getConnection();
             String sql = "select * from USERS where username = ?";
@@ -139,11 +143,13 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
         } finally {
             closeConnection(connection);
         }
+        */
+        return Optional.empty();
     }
 
     @Override
     public List<Account> getAccountsByUserId(Long id) {
-        Connection connection = null;
+       /* Connection connection = null;
         List<Account> accounts = new ArrayList<>();
         try {
             connection = getConnection();
@@ -165,6 +171,8 @@ public class JDBCDatabaseImpl extends JDBCRepository implements Database {
         } finally {
             closeConnection(connection);
         }
+        /*/
+       return new ArrayList<>();
     }
 
     @Override

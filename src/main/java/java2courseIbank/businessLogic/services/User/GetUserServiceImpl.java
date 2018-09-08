@@ -19,7 +19,7 @@ public class GetUserServiceImpl implements GetUserService {
     @Override
     @Transactional
     public GetUserResponse get(GetUserRequest request) {
-        Optional<User> userOpt = userRepository.getUser(request.getUserId());
+        Optional<User> userOpt = userRepository.getUser(request.getUserName());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             UserDTO userDTO = new UserDTO(
@@ -27,7 +27,7 @@ public class GetUserServiceImpl implements GetUserService {
             );
             return new GetUserResponse(userDTO);
         } else {
-            AppError error = new AppError("id", "not found");
+            AppError error = new AppError("username", " not found");
             throw new AppException(error);
         }
     }

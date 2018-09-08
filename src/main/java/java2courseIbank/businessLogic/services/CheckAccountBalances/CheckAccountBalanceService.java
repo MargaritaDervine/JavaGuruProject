@@ -14,6 +14,7 @@ public class CheckAccountBalanceService {
     private AccountRepository repository;
 
     public List<Account> getAccountsByUser(User user) {
-        return  repository.getAccountsByUserId(user);
+        return  repository.getAccountsByUser(user);
+       // return  repository.getAccountsByUser(user);
     }
 }

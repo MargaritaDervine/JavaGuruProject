@@ -1,15 +1,8 @@
 package java2courseIbank.Util;
 
-import java2courseIbank.database.Database;
-import java2courseIbank.database.JDBC.JDBCDatabaseImpl;
-import java2courseIbank.database.ORM.UserRepositoryImpl;
-import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.Account;
-import java2courseIbank.domain.User;
-import java2courseIbank.businessLogic.services.LogInService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class BankUtil {

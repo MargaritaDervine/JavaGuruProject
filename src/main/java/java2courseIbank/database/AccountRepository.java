@@ -11,7 +11,6 @@ public interface AccountRepository {
 
     Optional<Account> getAccountByAccNumber(String AccNumber);
 
-    List<Account> getAccountsByUserId(User user);
+   List<Account> getAccountsByUser(User user);
 
-    List<Account> getAccountsByUserId(Long id);
 }

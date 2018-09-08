@@ -1,45 +1,72 @@
 package java2courseIbank.businessLogic.services.DoTransaction;
 
+import java2courseIbank.AppError;
 import java2courseIbank.database.AccountRepository;
+import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.Account;
+import java2courseIbank.domain.User;
+import java2courseIbank.web.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Component
 public class TransactionValidatorImpl implements TransactionValidator {
 
     @Override
-    public List<String> validateErrors(String accFrom, String accTo, double amount, AccountRepository accountRepository) {
-        // List<String> errors = validateAmount(accFrom, amount, accountRepository);
-        List<String> errors = validateAccounts(accFrom, accTo, accountRepository);
-        errors.add(validateAmount(accFrom, amount, accountRepository));
+    public List<AppError> validateTransaction(String accFrom, String accTo, double amount, AccountRepository accountRepository, UserRepository userRepository,String username) {
+        List<AppError> errors = new ArrayList<>();
+        Optional<User> userOpt = userRepository.getUser(username);
+        validateUser(userOpt,errors);
+
+        if(errors.isEmpty()){
+            User user = userOpt.get();
+            validateAccounts(accFrom, accTo, accountRepository, errors, user);
+            validateAmount(accFrom, amount, accountRepository, errors);
+        }
         return errors;
     }
 
     @Override
-    public String validateAmount(String accFrom, double amount, AccountRepository accountRepository) {
+    public void validateAmount(String accFrom, double amount, AccountRepository accountRepository, List<AppError> errors) {
         Optional<Account> fromAccOp = accountRepository.getAccountByAccNumber(accFrom);
-        Account fromAcc = fromAccOp.get();
-        String error = null;
-        if (fromAcc.getBalance() < amount) {
-            error = ("Not enough money");
+        if (fromAccOp.isPresent()) {
+            Account fromAcc = fromAccOp.get();
+            if (fromAcc.getBalance() < amount) {
+                AppError appError = new AppError(accFrom, " has not enough money");
+                errors.add(appError);
+            }
         }
-        return error;
     }
 
     @Override
-    public List<String> validateAccounts(String accFrom, String accTo, AccountRepository accountRepository) {
+    public void validateAccounts(String accFrom, String accTo, AccountRepository accountRepository, List<AppError> errors, User user) {
         Optional<Account> fromAccOp = accountRepository.getAccountByAccNumber(accFrom);
         Optional<Account> toAccOp = accountRepository.getAccountByAccNumber(accTo);
-        List<String> errors = new ArrayList<>();
         if (!fromAccOp.isPresent()) {
-            errors.add("Account " + accFrom + " does not exist");
+            AppError appError = new AppError(accFrom, " does not exist");
+            errors.add(appError);
         }
         if (!toAccOp.isPresent()) {
-            errors.add("Account " + accTo + " does not exist");
+            AppError appError = new AppError(accTo, " does not exist");
+            errors.add(appError);
         }
-        return errors;
+
+        if(fromAccOp.isPresent()){
+            Account account = fromAccOp.get();
+            List<Account> userAccounts = accountRepository.getAccountsByUser(user);
+            if (!userAccounts.contains(account)) {
+                errors.add(new AppError("Account", " does not belong to user"));
+            }
+        }
     }
+    private void validateUser(Optional<User> userOpt, List<AppError> validationErrors) {
+        if (!userOpt.isPresent()) {
+            validationErrors.add(new AppError("username", "Not found"));
+        }
+    }
+
+
 }

@@ -8,26 +8,26 @@ import java.util.List;
 public class TransactionHistoryResponse {
     List<Transaction> tranasctionList;
     private boolean success;
-    private AppError error;
+    private List<AppError>  errors;
 
-    public TransactionHistoryResponse(List<Transaction> tranasctionList) {
+    public TransactionHistoryResponse(List<Transaction> tranasctionList, List<AppError> errors) {
         this.tranasctionList = tranasctionList;
         this.success = true;
-        this.error = null;
+        this.errors = null;
     }
 
-    public TransactionHistoryResponse(AppError error) {
+    public TransactionHistoryResponse(List<AppError> errors) {
         this.tranasctionList = null;
         this.success = false;
-        this.error = error;
+        this.errors = errors;
     }
 
     public void setSuccess(boolean success) {
         this.success = success;
     }
 
-    public void setError(AppError error) {
-        this.error = error;
+    public void setErrors(List<AppError> errors) {
+        this.errors = errors;
     }
 
     public boolean isSuccess() {
@@ -35,8 +35,8 @@ public class TransactionHistoryResponse {
         return success;
     }
 
-    public AppError getError() {
-        return error;
+    public List<AppError>  getErrors() {
+        return errors;
     }
 
     public void setTranasctionList(List<Transaction> tranasctionList) {

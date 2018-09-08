@@ -4,11 +4,17 @@ public class DoTransactionRequest {
     private String accFrom;
     private String accTo;
     private double amt;
+    String username;
 
-    public DoTransactionRequest(String accFrom, String accTo, double amt) {
+    public String getUsername() {
+        return username;
+    }
+
+    public DoTransactionRequest(String accFrom, String accTo, double amt, String username) {
         this.accFrom = accFrom;
         this.accTo = accTo;
         this.amt = amt;
+        this.username = username;
     }
 
     public String getAccFrom() {
