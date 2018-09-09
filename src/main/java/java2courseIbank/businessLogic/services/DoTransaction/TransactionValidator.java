@@ -4,7 +4,6 @@ import java2courseIbank.AppError;
 import java2courseIbank.database.AccountRepository;
 import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.User;
-import java2courseIbank.web.UserDTO;
 
 import java.util.List;
 

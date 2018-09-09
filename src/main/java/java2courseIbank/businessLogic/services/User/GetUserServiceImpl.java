@@ -4,7 +4,7 @@ import java2courseIbank.AppError;
 import java2courseIbank.AppException;
 import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.User;
-import java2courseIbank.web.UserDTO;
+import java2courseIbank.web.DTOs.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

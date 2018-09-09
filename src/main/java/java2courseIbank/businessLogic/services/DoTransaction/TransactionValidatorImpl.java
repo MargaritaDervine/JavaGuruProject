@@ -5,7 +5,6 @@ import java2courseIbank.database.AccountRepository;
 import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.Account;
 import java2courseIbank.domain.User;
-import java2courseIbank.web.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

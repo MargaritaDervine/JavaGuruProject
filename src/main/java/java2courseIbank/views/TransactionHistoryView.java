@@ -27,7 +27,7 @@ public class TransactionHistoryView implements ConsoleView {
 
     @Override
     public void execute() {
-        userName = BankUtil.getUserName();
+      /*  userName = BankUtil.getUserName();
         checkAccountsAndBalancesView.printAccounts();
         printQuery();
         String accNumber = getAccNumber();
@@ -42,7 +42,7 @@ public class TransactionHistoryView implements ConsoleView {
                 printTransactionList(transactionList);
             } else System.out.println("No transactions for selected account");
         }
-
+*/
     }
 
     public void printTransactionList(List<Transaction> transactionList) {

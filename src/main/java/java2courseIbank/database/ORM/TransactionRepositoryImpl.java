@@ -20,8 +20,6 @@ public class TransactionRepositoryImpl extends ORMRepository implements Transact
         Criterion rest2 = Restrictions.eq("toAccount", account);
         return session().createCriteria(Transaction.class)
                 .add(Restrictions.or(rest1, rest2))
-                //.add(Restrictions.eq("fromAcc", account))
-                // .add(Restrictions.eq("toAccount", account))
                 .list();
     }
 

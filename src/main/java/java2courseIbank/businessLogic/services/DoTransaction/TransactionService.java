@@ -1,16 +1,12 @@
 package java2courseIbank.businessLogic.services.DoTransaction;
 
 import java2courseIbank.AppError;
-import java2courseIbank.businessLogic.services.User.GetUserRequest;
-import java2courseIbank.businessLogic.services.User.GetUserResponse;
 import java2courseIbank.businessLogic.services.User.GetUserService;
 import java2courseIbank.database.AccountRepository;
 import java2courseIbank.database.TransactionRepository;
 import java2courseIbank.database.UserRepository;
 import java2courseIbank.domain.Account;
 import java2courseIbank.domain.Transaction;
-import java2courseIbank.domain.User;
-import java2courseIbank.web.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

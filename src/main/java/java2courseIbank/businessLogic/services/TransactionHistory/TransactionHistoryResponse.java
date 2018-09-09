@@ -2,15 +2,16 @@ package java2courseIbank.businessLogic.services.TransactionHistory;
 
 import java2courseIbank.AppError;
 import java2courseIbank.domain.Transaction;
+import java2courseIbank.web.DTOs.TransactionDTO;
 
 import java.util.List;
 
 public class TransactionHistoryResponse {
-    List<Transaction> tranasctionList;
+    List<TransactionDTO> tranasctionList;
     private boolean success;
     private List<AppError>  errors;
 
-    public TransactionHistoryResponse(List<Transaction> tranasctionList, List<AppError> errors) {
+    public TransactionHistoryResponse(List<TransactionDTO> tranasctionList, List<AppError> errors) {
         this.tranasctionList = tranasctionList;
         this.success = true;
         this.errors = null;
@@ -39,12 +40,12 @@ public class TransactionHistoryResponse {
         return errors;
     }
 
-    public void setTranasctionList(List<Transaction> tranasctionList) {
+    public void setTranasctionList(List<TransactionDTO> tranasctionList) {
         this.tranasctionList = tranasctionList;
 
     }
 
-    public List<Transaction> getTranasctionList() {
+    public List<TransactionDTO> getTranasctionList() {
         return tranasctionList;
     }
 

@@ -18,7 +18,6 @@ public class TransactionHistoryRequest {
     }
 
     public String getAccountNumber() {
-
         return accountNumber;
     }
 

@@ -1,4 +1,4 @@
-package java2courseIbank.web;
+package java2courseIbank.web.DTOs;
 
 public class UserDTO {
 
